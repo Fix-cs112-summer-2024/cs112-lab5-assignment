@@ -29,7 +29,7 @@
             ]
         },
         {
-            "name": "(gdb) Launch",
+            "name": "(gdb) tester",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/tester",
