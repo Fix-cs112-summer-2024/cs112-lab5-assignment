@@ -14,11 +14,32 @@ typedef double Item;
 
 class Vec {
 public:
-	Vec();
-	virtual ~Vec();
-	
-private:
+    Vec();
+    virtual ~Vec();
+    Vec(unsigned size);
+    Vec(const Vec& original);
 
+    unsigned getSize() const;
+    Item* getArray() const;
+    Item getItem(unsigned index) const;
+    void setItem(unsigned index, const Item& it);
+    void setSize(unsigned newSize);
+
+    // assignment operator: e.g., v2 = original;
+    Vec& operator=(const Vec& original);
+    // equality operator: e.g., v1 == v2
+    bool operator==(const Vec& v2) const;
+    void writeTo(ostream& out) const;
+    void readFrom(istream& in);
+
+    Item& operator[](unsigned index);
+    const Item& operator[](unsigned index) const;
+    Vec operator+(const Vec& rhs) const;
+    Vec operator-(const Vec& rhs) const;
+
+private:
+    unsigned mySize;
+    Item* myArray;
 };
 
 #endif /*VEC_H_*/
