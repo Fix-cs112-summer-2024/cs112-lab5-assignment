@@ -1,5 +1,5 @@
 /*
- * PythonLikeList.cpp
+ * PyList.cpp
  *
  *  Created on: Feb 4, 2022
  *      Author: vtn2
@@ -8,20 +8,20 @@
 #include <stdexcept>
 #include <iostream>
 using namespace std;
-#include "PythonLikeList.h"
+#include "PyList.h"
 
-PythonLikeList::PythonLikeList() {
+PyList::PyList() {
 	mySize = 0;
 	myCapacity = 0;
 	myArray = nullptr;
 }
 
-PythonLikeList::PythonLikeList(int size) {
+PyList::PyList(int size) {
 	mySize = myCapacity = size;
 	myArray = new Item[size]();
 }
 
-PythonLikeList::PythonLikeList(const PythonLikeList &orig) {
+PyList::PyList(const PyList &orig) {
 	// cout << "copy ctor called with object " << &orig << endl;
 	mySize = orig.mySize;
 	myCapacity = orig.myCapacity;
@@ -37,11 +37,11 @@ PythonLikeList::PythonLikeList(const PythonLikeList &orig) {
 }
 
 // called when object goes out of scope.
-PythonLikeList::~PythonLikeList() {
+PyList::~PyList() {
 	delete [] myArray;
 }
 
-void PythonLikeList::append(const Item &value) {
+void PyList::append(const Item &value) {
     if (mySize >= myCapacity) {
         // Note: double the capacity, unless it was 0, then make it 1.
         int newCapacity = myCapacity == 0 ? 1 : myCapacity * 2;
@@ -57,18 +57,18 @@ void PythonLikeList::append(const Item &value) {
     mySize++;
 }
 
-int PythonLikeList::getSize() const {
+int PyList::getSize() const {
 	return mySize;
 }
 
-Item PythonLikeList::getValue(int index) const {
+Item PyList::getValue(int index) const {
 	if (index >= mySize) {
 		throw range_error("index " + to_string(index) + " out of range");
 	}
 	return myArray[index];
 }
 
-void PythonLikeList::setValue(int index, const Item &value) {
+void PyList::setValue(int index, const Item &value) {
 	if (index >= mySize) {
 		throw range_error("index " + to_string(index) + " out of range");
 	}
@@ -76,15 +76,15 @@ void PythonLikeList::setValue(int index, const Item &value) {
 }
 
 // return a reference to the index-th location.
-Item & PythonLikeList::operator[](int index) const {
+Item & PyList::operator[](int index) const {
 	if (index >= mySize) {
 		throw range_error("index " + to_string(index) + " out of range");
 	}
 	return myArray[index];
 }
 
-PythonLikeList & PythonLikeList::operator+(const PythonLikeList &rhs) const {
-	PythonLikeList *result = new PythonLikeList(mySize + rhs.mySize);
+PyList & PyList::operator+(const PyList &rhs) const {
+	PyList *result = new PyList(mySize + rhs.mySize);
 	for (int i = 0; i < mySize; i++) {
 		(*result)[i] = myArray[i];
 	}
@@ -94,7 +94,7 @@ PythonLikeList & PythonLikeList::operator+(const PythonLikeList &rhs) const {
 	return *result;
 }
 
-ostream& operator<<(ostream &out, const PythonLikeList &rhs) {
+ostream& operator<<(ostream &out, const PyList &rhs) {
 	out << "[";
 	for (int i = 0; i < rhs.getSize(); i++) {
 		out << rhs[i];

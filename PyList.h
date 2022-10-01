@@ -13,12 +13,12 @@ using namespace std;
 
 typedef string Item;
 
-class PythonLikeList {
+class PyList {
 public:
-	PythonLikeList();
-	PythonLikeList(int size);
-	PythonLikeList(const PythonLikeList &orig); // copy ctor
-	virtual ~PythonLikeList();
+	PyList();
+	PyList(int size);
+	PyList(const PyList &orig); // copy ctor
+	virtual ~PyList();
 
 	// getters
 	int getSize() const;
@@ -31,7 +31,7 @@ public:
 	// others
 	void append(const Item &value);
 
-	PythonLikeList & operator+(const PythonLikeList &rhs) const;
+	PyList & operator+(const PyList &rhs) const;
 
 private:
 	int mySize;      // number of items in the array
@@ -40,6 +40,6 @@ private:
 };
 
 // make it so we can do cout << aList.
-ostream& operator<<(ostream &out, const PythonLikeList &rhs);
+ostream& operator<<(ostream &out, const PyList &rhs);
 
 #endif /* CS112LIST_H_ */

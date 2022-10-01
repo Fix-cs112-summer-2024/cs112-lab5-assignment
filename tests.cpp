@@ -207,7 +207,7 @@
 //         for (unsigned i = 0; i < 5; ++i) {
 //             v1.setItem(i, i + 1);
 //         }
-//         Item* saveAddress = v1.getArray();
+//         double* saveAddress = v1.getArray();
 //         v1.setSize(8);
 //         REQUIRE(v1.getSize() == 8);
 //         for (unsigned i = 0; i < 5; ++i) {
@@ -223,7 +223,7 @@
 //         for (unsigned i = 0; i < 5; ++i) {
 //             v2.setItem(i, i + 1);
 //         }
-//         Item* saveAddress = v2.getArray();
+//         double* saveAddress = v2.getArray();
 //         v2.setSize(3);
 //         REQUIRE(v2.getSize() == 3);
 //         for (unsigned i = 0; i < 3; ++i) {
@@ -236,7 +236,7 @@
 //         for (unsigned i = 0; i < 5; ++i) {
 //             v3.setItem(i, i + 1);
 //         }
-//         Item* saveAddress = v3.getArray();
+//         double* saveAddress = v3.getArray();
 //         v3.setSize(5);
 //         REQUIRE(v3.getSize() == 5);
 //         for (unsigned i = 0; i < 5; ++i) {
@@ -449,4 +449,84 @@
 //         Vec<double> v4(3);
 //         REQUIRE_THROWS_AS(v3 = v2 - v4, invalid_argument);
 //     }
+// }
+
+#include "PyList.h"
+using namespace std;
+
+// TEST_CASE("PyLists") {
+//     PyList lst;
+//     PyList lst2(5);
+//     SECTION("empty") {
+//         REQUIRE(lst.getSize() == 0);
+//     }
+//     SECTION("nonempty") {
+//         REQUIRE(lst2.getSize() == 5);
+//     }
+//     SECTION("getValue") {
+//         REQUIRE(lst2.getValue(0) == "");
+//         REQUIRE(lst2.getValue(4) == "");
+//         REQUIRE_THROWS_AS(lst2.getValue(5), range_error);
+//     }
+//     SECTION("setValue") {
+//         lst2.setValue(0, "hi");
+//         REQUIRE(lst2.getValue(0) == "hi");
+//         REQUIRE_THROWS_AS(lst2.getValue(5), range_error);
+//     }
+//     SECTION("subscripting") {
+//         lst2.setValue(0, "hi");
+//         REQUIRE(lst2[0] == "hi");  // getting the value
+//         lst2[1] = "hello";         // setting the value.
+//         REQUIRE(lst2[1] == "hello");
+//         REQUIRE_THROWS_AS(lst2[5], range_error);
+//     }
+//     SECTION("copy constructor") {
+//         PyList lst3(lst2);
+//         REQUIRE(lst3.getSize() == lst2.getSize());
+//         lst2[2] = "please work!";
+//         REQUIRE(lst3[2] != "please work!");
+//     }
+//     SECTION("printing") {
+//         PyList lst4(2);
+//         lst4[0] = "Victor";
+//         lst4[1] = "Norman";
+//         std::cout << "This is a list -->" << lst4 << "<--\n";
+//     }
+//     SECTION("append") {
+//         PyList aList;
+//         REQUIRE(aList.getSize() == 0);
+//         aList.append("Alex");
+//         REQUIRE(aList.getSize() == 1);
+//         REQUIRE(aList[0] == "Alex");
+//         aList.append("Betty");
+//         REQUIRE(aList.getSize() == 2);
+//         REQUIRE(aList[0] == "Alex");
+//         REQUIRE(aList[1] == "Betty");
+//     }
+//     SECTION("operator+") {
+//         PyList l1;
+//         l1.append("Hi");
+//         PyList l2;
+//         l2.append("Nihao");
+//         l2.append("Konnichiwa");
+//         PyList l3 = l1 + l2;
+//         REQUIRE(l3.getSize() == 3);
+//         REQUIRE(l3[0] == "Hi");
+//         REQUIRE(l3[1] == "Nihao");
+//         REQUIRE(l3[2] == "Konnichiwa");
+//     }
+//     // SECTION("negative indexes") {
+//     // PyList l4;
+//     // l4.append("Hi");
+//     // l4.append("Nihao");
+//     // l4.append("Konnichiwa");
+//     // REQUIRE(l4[-1] == "Konnichiwa");
+//     // REQUIRE(l4[-2] == "Nihao");
+//     // REQUIRE(l4.getValue(-2) == "Nihao");
+//     // REQUIRE_THROWS_AS(l4[-4], range_error);
+//     // l4[-1] = "AufWiedersehen";
+//     // REQUIRE(l4[2] == "AufWiedersehen");
+//     // l4.setValue(-1, "Hallo");
+//     // REQUIRE(l4[2] == "Hallo");
+//     // }
 // }
