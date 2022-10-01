@@ -1,7 +1,7 @@
 # assignment name (generate executable with this name)
 TEST_TARGET = tester
 # .cpp files that do not contain a main() function.
-SOURCES =
+SOURCES = Vec.cpp
 
 CPP       = g++ --std=c++11 -c
 CPPFLAGS   = -Wall -I. -g
