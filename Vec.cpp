@@ -33,7 +33,7 @@ Vec::Vec(const Vec& original) {
     mySize = original.mySize;
     if (original.mySize > 0) {
         myArray = new Item[original.mySize]();
-        for (int i = 0; i < original.mySize; i++) {
+        for (unsigned i = 0; i < original.mySize; i++) {
             myArray[i] = original.myArray[i];
         }
     } else {
@@ -62,7 +62,7 @@ Vec& Vec::operator=(const Vec& original) {
             }
             mySize = original.mySize;
         }
-        for (int i = 0; i < mySize; i++) {
+        for (unsigned i = 0; i < mySize; i++) {
             myArray[i] = original.myArray[i];
         }
     }
@@ -92,11 +92,11 @@ void Vec::setSize(unsigned newSize) {
         } else {
             Item* newArray = new Item[newSize]();
             if (mySize < newSize) {
-                for (int i = 0; i < mySize; i++) {
+                for (unsigned i = 0; i < mySize; i++) {
                     newArray[i] = myArray[i];
                 }
             } else {
-                for (int i = 0; i < newSize; i++) {
+                for (unsigned i = 0; i < newSize; i++) {
                     newArray[i] = myArray[i];
                 }
             }
@@ -111,7 +111,7 @@ bool Vec::operator==(const Vec& v2) const {
     if (mySize != v2.mySize) {
         return false;
     }
-    for (int i = 0; i < mySize; i++) {
+    for (unsigned i = 0; i < mySize; i++) {
         if (myArray[i] != v2.myArray[i]) {
             return false;
         }
@@ -120,13 +120,13 @@ bool Vec::operator==(const Vec& v2) const {
 }
 
 void Vec::writeTo(ostream& out) const {
-    for (int i = 0; i < mySize; i++) {
+    for (unsigned i = 0; i < mySize; i++) {
         out << myArray[i] << ' ';
     }
 }
 
 void Vec::readFrom(istream& in) {
-    for (int i = 0; i < mySize; i++) {
+    for (unsigned i = 0; i < mySize; i++) {
         in >> myArray[i];
     }
 }
@@ -150,7 +150,7 @@ Vec Vec::operator+(const Vec &rhs) const {
         throw invalid_argument("Cannot add vectors of different sizes");
     }
     Vec res(mySize);
-    for (int i = 0; i < mySize; i++) {
+    for (unsigned i = 0; i < mySize; i++) {
         res[i] = myArray[i] + rhs[i];
     }
     return res;
@@ -161,7 +161,7 @@ Vec Vec::operator-(const Vec& rhs) const {
         throw invalid_argument("Cannot add vectors of different sizes");
     }
     Vec res(mySize);
-    for (int i = 0; i < mySize; i++) {
+    for (unsigned i = 0; i < mySize; i++) {
         res[i] = myArray[i] - rhs[i];
     }
     return res;
