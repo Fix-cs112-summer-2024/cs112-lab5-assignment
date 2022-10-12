@@ -16,7 +16,7 @@ typedef string Item;
 class PyList {
 public:
 	PyList();
-	PyList(int size);
+	PyList(int capacity);
 	PyList(const PyList &orig); // copy ctor
 	virtual ~PyList();
 

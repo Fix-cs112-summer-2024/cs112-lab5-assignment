@@ -16,9 +16,10 @@ PyList::PyList() {
 	myArray = nullptr;
 }
 
-PyList::PyList(int size) {
-	mySize = myCapacity = size;
-	myArray = new Item[size]();
+PyList::PyList(int capacity) {
+    mySize = 0;
+	myCapacity = capacity;
+    myArray = new Item[myCapacity]();
 }
 
 PyList::PyList(const PyList &orig) {
