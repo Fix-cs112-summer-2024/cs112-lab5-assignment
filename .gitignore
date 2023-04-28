@@ -34,5 +34,8 @@
 .DS_Store
 Thumbs.db
 /*.dSYM/
-lab4
+lab5
 tester
+core
+.nfs*
+
