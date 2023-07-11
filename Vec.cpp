@@ -45,10 +45,6 @@ unsigned Vec::getSize() const {
     return mySize;
 }
 
-Item* Vec::getArray() const {
-    return myArray;
-}
-
 // assignment operator: e.g., v2 = original;
 Vec& Vec::operator=(const Vec& original) {
     if (this != &original) {

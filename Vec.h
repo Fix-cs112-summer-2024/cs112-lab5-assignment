@@ -20,7 +20,6 @@ public:
     Vec(const Vec& original);
 
     unsigned getSize() const;
-    Item* getArray() const;
     Item getItem(unsigned index) const;
     void setItem(unsigned index, const Item& it);
     void setSize(unsigned newSize);
