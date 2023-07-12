@@ -15,31 +15,31 @@ typedef string Item;
 
 class PyList {
 public:
-	PyList();
-	PyList(int capacity);
-	PyList(const PyList &orig); // copy ctor
-	virtual ~PyList();
+    PyList();
+    PyList(int capacity);
+    PyList(const PyList &orig);  // copy ctor
+    virtual ~PyList();
 
-	// getters
-	int getSize() const;
-	Item getValue(int index) const;
-	Item & operator[](int index) const;
+    // getters
+    int getSize() const;
+    Item getValue(int index) const;
+    Item &operator[](int index) const;
 
-	// setters
-	void setValue(int index, const Item &value);
+    // setters
+    void setValue(int index, const Item &value);
 
-	// others
-	void append(const Item &value);
+    // others
+    void append(const Item &value);
 
-	PyList & operator+(const PyList &rhs) const;
+    PyList &operator+(const PyList &rhs) const;
 
 private:
-	int mySize;      // number of items in the array
-	int myCapacity;  // how much space we have for items
-	Item *myArray;   // an array, of course.
+    int mySize;      // number of items in the array
+    int myCapacity;  // how much space we have for items
+    Item *myArray;   // an array, of course.
 };
 
 // make it so we can do cout << aList.
-ostream& operator<<(ostream &out, const PyList &rhs);
+ostream &operator<<(ostream &out, const PyList &rhs);
 
 #endif /* CS112LIST_H_ */
