@@ -8,7 +8,9 @@ permissions:
   contents: read
 jobs:
   run-autograding-tests:
-    runs-on: ubuntu-latest
+    runs-on: arc-runners-cs112
+    container:
+      image: calvincsinfrastructure/devcontainer-cs112-autograde:latest
     if: github.actor != 'github-classroom[bot]'
     steps:
     - name: Checkout code
