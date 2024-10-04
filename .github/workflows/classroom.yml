@@ -1,7 +1,6 @@
 name: Autograding Tests
-'on':
-- push
-- repository_dispatch
+"on":
+  - push
 permissions:
   checks: write
   actions: read
@@ -13,150 +12,146 @@ jobs:
       image: calvincsinfrastructure/devcontainer-cs112-autograde:latest
     if: github.actor != 'github-classroom[bot]'
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    - name: constructors
-      id: constructors
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: constructors
-        setup-command: make
-        command: "./tester constructors"
-        timeout: 4
-        max-score: 1
-    - name: destructor
-      id: destructor
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: destructor
-        setup-command: make
-        command: "./tester destructor"
-        timeout: 10
-        max-score: 0
-    - name: getSize
-      id: getsize
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: getSize
-        setup-command: make
-        command: "./tester getSize"
-        timeout: 10
-        max-score: 1
-    - name: setItem
-      id: setitem
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: setItem
-        setup-command: make
-        command: "./tester setItem"
-        timeout: 10
-        max-score: 0
-    - name: getItem
-      id: getitem
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: getItem
-        setup-command: make
-        command: "./tester getItem"
-        timeout: 10
-        max-score: 0
-    - name: setSize
-      id: setsize
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: setSize
-        setup-command: make
-        command: "./tester setSize"
-        timeout: 10
-        max-score: 1
-    - name: equality
-      id: equality
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: equality
-        setup-command: make
-        command: "./tester equality"
-        timeout: 10
-        max-score: 0
-    - name: writeToStream
-      id: writetostream
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: writeToStream
-        setup-command: make
-        command: "./tester writeToStream"
-        timeout: 10
-        max-score: 1
-    - name: readFrom
-      id: readfrom
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: readFrom
-        setup-command: make
-        command: "./tester readFromStream"
-        timeout: 10
-        max-score: 0
-    - name: subscript
-      id: subscript
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: subscript
-        setup-command: make
-        command: "./tester subscript"
-        timeout: 10
-        max-score: 1
-    - name: addition
-      id: addition
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: addition
-        setup-command: make
-        command: "./tester addition"
-        timeout: 10
-        max-score: 0
-    - name: subtraction
-      id: subtraction
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: subtraction
-        setup-command: make
-        command: "./tester subtraction"
-        timeout: 10
-        max-score: 0
-    - name: validate-index
-      id: validate-index
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: validate-index
-        setup-command: make
-        command: "./tester validate_index"
-        timeout: 10
-        max-score: 5
-    - name: find
-      id: find
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: find
-        setup-command: make
-        command: "./tester find"
-        timeout: 10
-        max-score: 3
-    - name: Autograding Reporter
-      uses: classroom-resources/autograding-grading-reporter@v1
-      env:
-        CONSTRUCTORS_RESULTS: "${{steps.constructors.outputs.result}}"
-        DESTRUCTOR_RESULTS: "${{steps.destructor.outputs.result}}"
-        GETSIZE_RESULTS: "${{steps.getsize.outputs.result}}"
-        SETITEM_RESULTS: "${{steps.setitem.outputs.result}}"
-        GETITEM_RESULTS: "${{steps.getitem.outputs.result}}"
-        SETSIZE_RESULTS: "${{steps.setsize.outputs.result}}"
-        EQUALITY_RESULTS: "${{steps.equality.outputs.result}}"
-        WRITETOSTREAM_RESULTS: "${{steps.writetostream.outputs.result}}"
-        READFROM_RESULTS: "${{steps.readfrom.outputs.result}}"
-        SUBSCRIPT_RESULTS: "${{steps.subscript.outputs.result}}"
-        ADDITION_RESULTS: "${{steps.addition.outputs.result}}"
-        SUBTRACTION_RESULTS: "${{steps.subtraction.outputs.result}}"
-        VALIDATE-INDEX_RESULTS: "${{steps.validate-index.outputs.result}}"
-        FIND_RESULTS: "${{steps.find.outputs.result}}"
-      with:
-        runners: constructors,destructor,getsize,setitem,getitem,setsize,equality,writetostream,readfrom,subscript,addition,subtraction,validate-index,find
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: compile via make
+        id: compile-make
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: compile
+          setup-command: make
+          command: test -f tester
+          timeout: 4
+          max-score: 0
+      - name: constructors
+        id: constructors
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: constructors
+          command: "./tester constructors"
+          timeout: 4
+          max-score: 1
+      - name: destructor
+        id: destructor
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: destructor
+          setup-command: make
+          command: "./tester destructor"
+          timeout: 10
+          max-score: 0
+      - name: getSize
+        id: getsize
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: getSize
+          command: "./tester getSize"
+          timeout: 10
+          max-score: 1
+      - name: setItem
+        id: setitem
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: setItem
+          command: "./tester setItem"
+          timeout: 10
+          max-score: 0
+      - name: getItem
+        id: getitem
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: getItem
+          command: "./tester getItem"
+          timeout: 10
+          max-score: 0
+      - name: setSize
+        id: setsize
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: setSize
+          command: "./tester setSize"
+          timeout: 10
+          max-score: 1
+      - name: equality
+        id: equality
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: equality
+          command: "./tester equality"
+          timeout: 10
+          max-score: 0
+      - name: writeToStream
+        id: writetostream
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: writeToStream
+          command: "./tester writeToStream"
+          timeout: 10
+          max-score: 1
+      - name: readFrom
+        id: readfrom
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: readFrom
+          command: "./tester readFromStream"
+          timeout: 10
+          max-score: 0
+      - name: subscript
+        id: subscript
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: subscript
+          command: "./tester subscript"
+          timeout: 10
+          max-score: 1
+      - name: addition
+        id: addition
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: addition
+          command: "./tester addition"
+          timeout: 10
+          max-score: 0
+      - name: subtraction
+        id: subtraction
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: subtraction
+          command: "./tester subtraction"
+          timeout: 10
+          max-score: 0
+      - name: validate-index
+        id: validate-index
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: validate-index
+          command: "./tester validate_index"
+          timeout: 10
+          max-score: 5
+      - name: find
+        id: find
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: find
+          command: "./tester find"
+          timeout: 10
+          max-score: 3
+      - name: Autograding Reporter
+        uses: classroom-resources/autograding-grading-reporter@v1
+        env:
+          CONSTRUCTORS_RESULTS: "${{steps.constructors.outputs.result}}"
+          DESTRUCTOR_RESULTS: "${{steps.destructor.outputs.result}}"
+          GETSIZE_RESULTS: "${{steps.getsize.outputs.result}}"
+          SETITEM_RESULTS: "${{steps.setitem.outputs.result}}"
+          GETITEM_RESULTS: "${{steps.getitem.outputs.result}}"
+          SETSIZE_RESULTS: "${{steps.setsize.outputs.result}}"
+          EQUALITY_RESULTS: "${{steps.equality.outputs.result}}"
+          WRITETOSTREAM_RESULTS: "${{steps.writetostream.outputs.result}}"
+          READFROM_RESULTS: "${{steps.readfrom.outputs.result}}"
+          SUBSCRIPT_RESULTS: "${{steps.subscript.outputs.result}}"
+          ADDITION_RESULTS: "${{steps.addition.outputs.result}}"
+          SUBTRACTION_RESULTS: "${{steps.subtraction.outputs.result}}"
+          VALIDATE-INDEX_RESULTS: "${{steps.validate-index.outputs.result}}"
+          FIND_RESULTS: "${{steps.find.outputs.result}}"
+        with:
+          runners: constructors,destructor,getsize,setitem,getitem,setsize,equality,writetostream,readfrom,subscript,addition,subtraction,validate-index,find
